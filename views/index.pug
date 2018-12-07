@@ -1,0 +1,10 @@
+extends layout/layout
+block content
+    h1 Hello There
+    if(user)
+      p Welcome #{user.username}
+      p want to log out ?
+      a(href="/logout") logout
+    else
+      p Welcome Back Please login
+      a(href="/login") Login

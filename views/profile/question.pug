@@ -1,0 +1,13 @@
+extends ../layout/layout
+block content
+  h1
+  if(user)
+    h2= postBody
+    h3= userAsking
+    form(action="/profile/" + username + "/questions/" + postId, method="post")
+      label(for="answer") Your Answer 
+      input(type="text", name="answer")
+      button(type="submit") Answer!
+  else
+    p In order to answer please Login
+    a(href="/login") Login

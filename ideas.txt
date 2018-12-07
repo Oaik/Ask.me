@@ -1,0 +1,26 @@
+====
+Features
+Ask -> User + guest,
+answer -> the person who have questions(User),
+view answers -> User + guest
+
+
+===
+User ->     Answer, Ask, View answers, Profile(little bio and latest answers)
+post ->     Like
+
+===
+Schema
+User,
+Question/Answer
+
+====
+Pages
+Homepage(login/Register),
+Profile
+All UnAnswered Questions Page
+Answered Question Page
+
+//
+Find all posts by Username
+then filter it by questionAsnwered

@@ -1,0 +1,18 @@
+extends ../layout/layout
+block content
+    h2 Welcome in #{userProf} Profile
+    if(empty)
+        h4 No Questions Answered By #{userProf}
+    else    
+        form(action="/profile/"+userProf, method="post")
+            label(for="body") Question
+            input(type="text" name="body") 
+            button(type="submit") ask!
+        each val in data
+            h4 #{val.body}
+            if(val.allowName)
+                p Asked by #{val.userAsking}
+            h5 #{val.answer}
+            hr
+    
+    

@@ -1,0 +1,13 @@
+extends layout/layout
+block content
+    h1 Register Page
+    form(action="/register", method="post")
+        label(for="username") Username
+        input(type="text" name="username") 
+        label(for="email") Email
+        input(type="email" name="email") 
+        label(for="password") Password
+        input(type="password", name="password")
+        button(type="submit") Register
+    span Already Registered ? 
+    a(href="/login") Login

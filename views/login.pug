@@ -1,0 +1,12 @@
+extends layout/layout.pug
+
+block content
+    h1 Login Page
+    form(action="/login", method="post")
+        label(for="username") Username
+        input(type="text" name="username") 
+        label(for="password") Password
+        input(type="password", name="password")
+        button(type="submit") Login
+    span Are you new ? 
+    a(href="/register") Register now
