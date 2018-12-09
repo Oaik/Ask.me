@@ -1,0 +1,135 @@
+.no-margin {
+  margin: 0;
+}
+.no-padding {
+  padding: 0;
+}
+.font-bold {
+  font-weight: bold;
+}
+.text-big {
+  font-size: 25px;
+}
+.text-med {
+  font-size: 23px;
+}
+.collection-item {
+  min-height: 100px;
+}
+p.collection-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.min90 {
+  min-height: 90vh;
+}
+.rounded {
+  border-radius: 50px 10px;
+}
+.mb-5 {
+  margin-bottom: 50px;
+}
+.mb-1 {
+  margin-bottom: 10px;
+}
+.p-1 {
+  padding: 5px 20px 25px !important;
+}
+.green-ask {
+  color: #4ba69a;
+}
+.red-ask.bg {
+  background-color: #ff643c !important;
+  color: #ecf0f1 !important;
+}
+.red-ask {
+  color: #ff643c !important;
+}
+.gry-text {
+  color: #616161;
+}
+body {
+  color: #ecf0f1;
+  background-color: #2b3237;
+}
+nav {
+  background-color: #272d33;
+  color: #d9cb9e;
+}
+footer {
+  color: #374140;
+}
+form {
+  padding-top: 5px;
+  padding-bottom: 75px;
+}
+form button {
+  margin-bottom: 25px;
+}
+#ask-1 {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  min-height: 75vh;
+  padding: 50px 0;
+}
+#ask-2 {
+  background-color: #272d33;
+  color: #2c3e50;
+  min-height: 75vh;
+  padding: 50px 0;
+}
+#ask-3 {
+  background-color: #ff643c;
+  color: #ecf0f1;
+  min-height: 30vh;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ask-3 h1 {
+  margin-bottom: 30px;
+}
+#ask-3 a {
+  font-size: 17px;
+  font-weight: bold;
+}
+.wrapper {
+  margin-top: 2px;
+  background-color: #ecf0f1;
+  color: #272d33;
+}
+.wrapper-about {
+  margin-top: 2px;
+  background-color: #272d33;
+  color: #ecf0f1;
+}
+.input-field input {
+  color: #4ba69a;
+}
+.nav-i {
+  transition: 0.6s all ease-in;
+}
+.nav-i:hover,
+.nav-i:focus {
+  color: #ff643c !important;
+}
+.prof-i {
+  transition: 0.6s all ease-in;
+}
+.prof-i:hover,
+.prof-i:focus {
+  color: #4ba69a !important;
+}
+.prof-i-bg:hover,
+.prof-i-bg:focus {
+  color: #fff !important;
+  background-color: #4ba69a !important;
+}
+.prof-img {
+  transition: 0.7s all ease-out;
+}
+.prof-img:hover {
+  transform: translateX(-15px);
+}

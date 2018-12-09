@@ -56,19 +56,11 @@ router.route("/login")
         failureFlash: false 
     }))
 
-router.route("/account")
-    .get((req, res) => {
-        if(req.isAuthenticated())
-            res.send(req.user);
-        else
-            res.send("You not allowed to view this page, Please Login")
-    })
-
 router.route("/profile/:profile/questions")
     .get((req, res) => {
-        if(!req.isAuthenticated()) return res.send("You should Log in First");
+        if(!req.isAuthenticated()) return res.render("profile/profile", {authErr: true});
         let profileUsername = req.user.username
-        if (req.params.profile !== profileUsername) return res.send("You are not allowed to view this page")
+        if (req.params.profile !== profileUsername) return res.redirect("/");
         Post.find({userAsked: profileUsername}, (err, post) => {
             if(err) return res.send("err from post inside profile");
             let data = post.filter((answer) => {
@@ -81,25 +73,25 @@ router.route("/profile/:profile/questions")
 
 router.route("/profile/:profile/questions/:post")
     .get((req, res) => {
-        if(!req.isAuthenticated()) return res.send("You should Log in First");
+        if(!req.isAuthenticated()) return res.render("profile/profile", {authErr: true});
         let profileUsername = req.user.username
-        if (req.params.profile !== profileUsername) return res.send("You are not allowed to view this page")
+        if (req.params.profile !== profileUsername) return res.redirect("/");
         Post.findById(req.params.post, (err, post) => {
-            if (err) return res.send(err, "ERROR");
+            if (err) return res.status(404).send(err);
             console.log(post);
-            if (profileUsername !== post.userAsked) return res.send("You are not allowed to view this page,,,")
+            if (profileUsername !== post.userAsked) return res.redirect("/");
             if(post.questionAnswered)
                 return res.send(post);
             res.render("profile/question", {postBody: post.body, userAsking: post.userAsking, username: profileUsername, postId: post._id})
         })
     })
     .post((req, res) => {
-        if(!req.isAuthenticated()) return res.send("You should Log in First");
+        if(!req.isAuthenticated()) return res.render("profile/profile", {authErr: true});
         let profileUsername = req.user.username
-        if (req.params.profile !== profileUsername) return res.send("You are not allowed to view this page")
+        if (req.params.profile !== profileUsername) return res.redirect("/");
         Post.findById(req.params.post, (err, post) => {
             if (err) return res.send(err, "ERROR");
-            if (profileUsername !== post.userAsked) return res.send("You are not allowed to view this page,,,")
+            if (profileUsername !== post.userAsked) return res.redirect("/");
             let answerPost = post;
             answerPost.answer = req.body.answer, answerPost.questionAnswered = true;
             Post.findOneAndUpdate({_id: req.params.post}, answerPost).then((post) => {
@@ -107,9 +99,9 @@ router.route("/profile/:profile/questions/:post")
             });
         })
     })
-
-
-router.route("/profile/:profile")
+    
+    
+    router.route("/profile/:profile")
     .get((req, res) => {
         const profileUsername = req.params.profile;
         User.findOne({username: profileUsername}, (err, profile) => {
@@ -117,34 +109,50 @@ router.route("/profile/:profile")
             if (!profile || profile == null) return res.send("Profile not found")
             Post.find({userAsked: profileUsername}, (err, post) => {
                 if(err) return res.send("err from post inside profile");
-                console.log(post);
                 let data = post.filter((answer) => {
                     return answer.questionAnswered === true
                 })
-                
-                if(!data || data.length === 0)
-                    return res.render("profile/profile", {userProf: req.params.profile, empty: true});
-                res.render("profile/profile", {userProf: req.params.profile, data: data, empty: false});
+                numUnAnswered = post.filter((answer) => {
+                    return answer.questionAnswered === false
+                }).length
+                res.render("profile/profile", {userProf: req.params.profile, age:profile.age, gender: profile.gender, data: data, empty: (!data || data.length === 0), postCount: data.length, numUnAnswered });
             })
         })
     })
     .post((req, res) => {
-        if(!req.isAuthenticated()) return res.send("You should Log in First");
+        if(!req.isAuthenticated())
+            return res.render("login", {msgErr: true})
         const profileUsername = req.params.profile;
         User.findOne({username: profileUsername}, (err, profile) => {
-            if (err) return res.send("Error");
-            if (!profile || profile == null) return res.send("Profile not found")
+            if (!profile || profile == null) return res.redirect("/");
             const body = req.body;
+            console.log("Serv ", body);
+            console.log(body.allowName);
+            if(body.allowName == "on")
+                body.allowName = true;
+            else
+                body.allowName = false;
             if(!body.allowName)
                 body.userAsking = null;
             else
                 body.userAsking = req.user.username;
             body.userAsked = req.params.profile;
             body.answer = null;
+            console.log("Ques ", body);
             let newPost = new Post(body);
+            
             newPost.save()
                 .then(() => {
-                    res.send("Question has been sent")
+                    Post.find({userAsked: profileUsername}, (err, post) => {
+                        if(err) return res.send("err from post inside profile");
+                        let data = post.filter((answer) => {
+                            return answer.questionAnswered === true
+                        })
+                        numUnAnswered = post.filter((answer) => {
+                            return answer.questionAnswered === false
+                        }).length
+                        return res.render("profile/profile", {userProf: req.params.profile, age:profile.age, gender: profile.gender, data: data, empty: (!data || data.length === 0), postCount: data.length, numUnAnswered, msgDone: true });
+                    })
                 })
                 .catch((err) => {
                     console.log(err);

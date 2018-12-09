@@ -1,12 +1,25 @@
 extends layout/layout.pug
 
 block content
-    h1 Login Page
-    form(action="/login", method="post")
-        label(for="username") Username
-        input(type="text" name="username") 
-        label(for="password") Password
-        input(type="password", name="password")
-        button(type="submit") Login
-    span Are you new ? 
-    a(href="/register") Register now
+    .div
+        if(msgErr)
+            p.collection-item.white-text.red
+                i.material-icons.left error
+                | Please Login in order to ask this person
+        .row.col.s12.m8.valign-wrapper
+            .container.col.s12.m8.center-align.rounded.wrapper.z-depth-4
+                h1.gry-text Login Page
+                form(action="/login", method="post")
+                    .row
+                        .input-field.col.s12
+                            label(for="username") Username
+                            input(type="text" name="username") 
+                    .row
+                        .input-field.col.s12
+                            label(for="password") Password
+                            input(type="password", name="password")
+                    button(type="submit").btn.waves-effect.waves-light.btn-large.z-depth-3.red-ask.bg Login
+                        i.material-icons.right send
+                    br
+                    span Are you new ? 
+                    a(href="/register") Register now

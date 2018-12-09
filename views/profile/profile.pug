@@ -1,18 +1,62 @@
 extends ../layout/layout
 block content
-    h2 Welcome in #{userProf} Profile
-    if(empty)
-        h4 No Questions Answered By #{userProf}
-    else    
-        form(action="/profile/"+userProf, method="post")
-            label(for="body") Question
-            input(type="text" name="body") 
-            button(type="submit") ask!
-        each val in data
-            h4 #{val.body}
-            if(val.allowName)
-                p Asked by #{val.userAsking}
-            h5 #{val.answer}
-            hr
-    
-    
+    .container
+        if(authErr)
+            p.collection-item.white-text.red
+                i.material-icons.left error
+                | You Not Allowed To View This page
+        else
+            if(msgDone)
+                p.collection-item.green-text.grey.lighten-4
+                    i.material-icons.left check
+                    | Your Question has been sent
+            if(msgErr)
+                p.collection-item.white-text.red
+                    i.material-icons.left error
+                    | Please Login in order to ask this person
+            h2 Welcome in #{userProf} Profile
+            .row
+                .container.col.s12.m7.wrapper.z-depth-5.mb-5
+                    h4 Ask #{userProf} Anything 
+                    form(action="/profile/"+userProf, method="post")
+                        .row
+                            .input-field.col.s12
+                                label(for="body") Your Question
+                                textarea(name="body", cols="30", rows="10" required).materialize-textarea
+                        .switch.left
+                            label Hide
+                                input(type="checkbox", name="allowName")
+                                span.lever
+                                | Show 
+                            |  Your Name In Question
+                        button.right(type="submit").btn.waves-effect.waves-light.z-depth-3.red-ask.bg.prof-i.prof-i-bg Ask
+                            i.material-icons.right send
+                
+
+                .container.col.s12.offset-m1.m4.z-depth-4.wrapper-about
+                    h5 About #{userProf}
+                    .image.center.prof-img
+                        img(src="/images.png")
+                    p Age: 
+                        span.green-ask.font-bold #{age}
+                    p Gender: 
+                        span.green-ask.font-bold #{gender}
+                    p Number Of Questions Answered: 
+                        span.green-ask.font-bold #{postCount}
+                .clearfix
+                if(empty)
+                    h4 No Questions Answered By #{userProf}
+                else
+                    each val in data
+                        .container.col.s12.m7.wrapper.z-depth-4.mb-1.p-1
+                            h4 #{val.body}
+                            if(val.allowName)
+                                p.grey-text Asked by 
+                                    a(href="/profile/"+val.userAsking).red-ask.prof-i #{val.userAsking} 
+                            p #{val.answer}
+                            a(href="javascript:;").prof-i
+                                i.material-icons.red-ask.prof-i favorite
+                            a(href="javascript:;").prof-i
+                                i.material-icons.right.red-ask.prof-i bookmark
+                    
+            

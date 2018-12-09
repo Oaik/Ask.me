@@ -1,0 +1,24 @@
+nav#nav.navbar-fixed
+    .nav-wrapper
+        a(href="/").brand-logo.center.hide-on-small-only Ask 
+            span.red-ask Me
+        .hide-on-med-and-up
+            a(href="/").brand-logo.left.show-on-small Ask 
+                span.red-ask Me
+        ul#nav-mobile.right
+            if(user)
+                li
+                    a(href="/profile/"+user.username+"/questions").nav-i Questions 
+                        span.red-ask.font-bold
+                li
+                    a(href="/logout").nav-i logout
+            else
+                li 
+                    a(href="/login").right.nav-i
+                        span Login
+                        i.large.material-icons.right.red-ask account_circle
+                        
+                li 
+                    a(href="/register").nav-i
+                        span Register
+                        i.large.material-icons.right.green-ask group_add

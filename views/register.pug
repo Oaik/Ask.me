@@ -1,13 +1,35 @@
-extends layout/layout
+extends layout/layout.pug
+
 block content
-    h1 Register Page
-    form(action="/register", method="post")
-        label(for="username") Username
-        input(type="text" name="username") 
-        label(for="email") Email
-        input(type="email" name="email") 
-        label(for="password") Password
-        input(type="password", name="password")
-        button(type="submit") Register
-    span Already Registered ? 
-    a(href="/login") Login
+    .div
+        .row.col.s8.valign-wrapper
+            .container.col.s8.center-align.rounded.wrapper
+                h1.gry-text Register Page
+                form(action="/register", method="post")
+                    .row.s12
+                        .input-field.col.s12
+                            label(for="username") Username
+                            input(type="text" name="username") 
+                    .row.s12
+                        .input-field.col.s12
+                            label(for="email") Email
+                            input(type="email" name="email")
+                    .row.s12
+                        .input-field.col.s12
+                            label(for="password") Password
+                            input(type="password", name="password")
+                    .row
+                        .input-field.col.s6
+                            label(for="age") Age
+                            input(type="number", name="age")
+                        .input-field.col.s6
+                            select(name="gender")
+                                option(value="" disabled selected)
+                                option(value="male") Male
+                                option(value="female") Female
+                            label Select Your Gender
+                    
+                    button(type="submit").btn.waves-effect.waves-light.btn-large.z-depth-3 Register
+                    br
+                    span Already Registered ? 
+                    a(href="/login") Login

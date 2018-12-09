@@ -1,10 +1,32 @@
 extends layout/layout
 block content
-    h1 Hello There
-    if(user)
-      p Welcome #{user.username}
-      p want to log out ?
-      a(href="/logout") logout
-    else
-      p Welcome Back Please login
-      a(href="/login") Login
+  section#ask-1
+    .row
+      .col.s6
+        .container
+          h2.no-margin Ask Anyone 
+            span.green-ask Anything
+          br
+          p.text-big Just write your question and you will get the answer
+          br
+          p.text-med Don't waste your time and ask the right person about your thoughts
+      .col.s6.no-margin.no-padding
+        img.responsive-img(src="67.jpg", alt="")
+  section#ask-2.white-text
+    .row
+      .col.s6.no-margin.no-padding
+        img.responsive-img(src="25060.jpg", alt="")
+      .col.s6
+        .container
+          h2.no-margin You Can Hide Your  
+            span.red-ask Name 
+            | In Question
+          br
+          p.text-big You Can Show Or Hide Your name in the question by just a click
+          p.text-med Just Ask Anything In Your Mind
+  section#ask-3
+    .container
+      .row
+        .col.s12.center
+          h1.no-margin Want To Join ?
+          a.waves-effect.waves-light.btn-large.white.green-ask.rounded.prof-i-bg(href="/register") Register Today

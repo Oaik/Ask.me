@@ -1,13 +1,21 @@
 extends ../layout/layout
 block content
-  h1
+          
   if(user)
-    h2= postBody
-    h3= userAsking
-    form(action="/profile/" + username + "/questions/" + postId, method="post")
-      label(for="answer") Your Answer 
-      input(type="text", name="answer")
-      button(type="submit") Answer!
+    .row
+      .col.s12.form-box.wrapper.z-depth-4
+        .container
+          h4= postBody
+          if(userAsking)
+            p by 
+              a(href="/profile/"+userAsking) #{userAsking} 
+          form(action="/profile/" + username + "/questions/" + postId, method="post")
+            .row
+              .input-field.col.s12
+                  label(for="answer") Answer
+                  textarea(name="answer", cols="30", rows="10").materialize-textarea 
+              button.right(type="submit").btn.waves-effect.waves-light.z-depth-3.red-ask.bg Answer
+                i.material-icons.right send
   else
     p In order to answer please Login
     a(href="/login") Login

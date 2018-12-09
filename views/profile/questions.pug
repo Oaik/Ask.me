@@ -1,13 +1,19 @@
 extends ../layout/layout
 block content
-    if(empty)
-        h4 You Have No Questions
-    else    
-        each val in data
-            //- -var mylink = val.id
-            a(href="questions/"+val.id) #{val.body}
-            if(val.allowName)
-                p Asked by #{val.userAsking}
-            hr
-    
-    
+    .wrapper.min90
+        .container
+            if(empty)
+                h4 You Have No Questions
+            else    
+                h3.no-margin Your Questions
+                each val in data
+                    .col.s8
+                        .card
+                            .card-content
+                                h5 #{val.body}
+                                if(val.allowName)
+                                    p Asked by #{val.userAsking}
+                            .card-action
+                                a(href="questions/"+val.id) Answer
+                
+            
