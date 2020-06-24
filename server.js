@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 5000;
 const express       = require('express');
 const mongoose      = require('mongoose');
 const bodyParser    = require('body-parser')
@@ -18,7 +19,7 @@ app.set('view engine', 'pug')
 app.locals.user = null;
 
 // connect to DB
-mongoose.connect(config.mongodURI, { useNewUrlParser: true } , (err) => {
+mongoose.connect(config.mongodURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false } , (err) => {
     if (err)
         return console.log("error", err);
     console.log("Connected")
@@ -77,6 +78,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/');
 })
 
-app.listen('5000', () => {
-    console.log("running on port 5000");
+app.listen(PORT, () => {
+    console.log(`running on port ${PORT}`);
 })
