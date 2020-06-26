@@ -3,6 +3,8 @@ Website allow you to ask anyone (anonymously) or you can show your name, you can
 
 Technology and languages Used: Materialize, JavaScript, Node.js, Express.js, MongoDB,.js, Passport.js
 
+<a href="https://askmenowapp.herokuapp.com/"> Live preview try it out </a>
+
 ### 🚀 Demo
 
 Mainpage
