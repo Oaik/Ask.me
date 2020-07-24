@@ -15,6 +15,14 @@ router.route('/')
         return res.render('index')
     })
 
+router.route('/users')
+    .get((req, res) => {
+        User.find({}, (err, users) => {
+            console.log(users);
+            res.render("users", {users: users});
+        })
+    })
+
 router.route('/register')
     .get((req, res) => {
         if(req.user)

@@ -1,10 +1,19 @@
 nav#nav.navbar-fixed
     .nav-wrapper
-        a(href="/").brand-logo.center.hide-on-small-only Ask 
-            span.red-ask Me
-        .hide-on-med-and-up
-            a(href="/").brand-logo.left.show-on-small Ask 
+        .hide-on-small-only
+            ul#nav-mobile.left
+                li 
+                    a(href="/users").nav-i All Users    
+            a(href="/").brand-logo.center Ask 
                 span.red-ask Me
+        
+        .hide-on-med-and-up
+            ul#nav-mobile.left
+                li 
+                    a(href="/users").nav-i All Users
+
+
+   
         ul#nav-mobile.right
             if(user)
                 li

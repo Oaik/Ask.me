@@ -1,0 +1,11 @@
+extends ./layout/layout
+
+block content
+    .wrapper.min90
+        h3.center All Users
+        each user in users
+            .card
+                .card-content
+                    a(href="/profile/" + user.username) #{user.username} 
+                    span #{user.age} years 
+                    span #{user.gender}
